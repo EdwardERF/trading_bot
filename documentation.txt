@@ -2,4 +2,3 @@
 
 Alpha Vantage: https://www.alphavantage.co/
 Documentación de Alpha Vantage: https://www.alphavantage.co/documentation/
-
