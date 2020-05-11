@@ -1,0 +1,5 @@
+// Aquí voy a colocar toda la documentación que considere necesaria para la creación del bot
+
+Alpha Vantage: https://www.alphavantage.co/
+Documentación de Alpha Vantage: https://www.alphavantage.co/documentation/
+
