@@ -1,0 +1,29 @@
+// Aquí documentaré la lógica que intento seguir en el proceso de creación del bot
+
+// Creación de PRIMERA estrategia:
+// >> Pivote OPERABLE: cuando el high (o low) es superior a 4 velas anteriores y posteriores
+// >> Cuando hay dos Pivotes OPERABLES, se genera una recta utilizando los dos high (o low)
+// >> Si el mercado rompe esa recta, es una SEÑAL (aun no se ingresa)
+// >> Si el mercado llega al valor del ultimo Pivote OPERABLE y la distancia entre el TP y el punto de ingreso es mayor a 60 PIPS, se ingresa con SL del 30% del punto objetivo, y un TP en el punto objetivo.
+// >> Calculo del punto objetivo: la distancia desde el punto de ruptura hasta el ultimo Pivote (Operable o no) de dirección contraria a la recta, se mide desde el punto de ruptura hacia el lado contrario. Esa distancia es la que se usa para medir el punto objetivo (TP)
+
+###############################################################
+###############################################################
+###############################################################
+
+1 - Conectar a la API
+2 - Obtener velas por ID
+3 - Obtener valores open, high, low, close desde las ID
+4 - Obtener puntos pivote operables (4 antes y 4 despues) 
+  - >> Pivotes TOP
+  - >> Pivotes BOTTOM
+5 - Generar recta con esos dos puntos pivote.
+  - >> Recta TOP
+  - >> Recta BOTTOM
+6 - Si recta es rota, es señal.
+  - >> Si rompe ultimo pivote operable, <<INGRESO>>
+  - >> >> Chequear previo a INGRESO: si distancia entre ingreso - TP es mayor a 60 Micro PIPs.
+  - >> Calculo del punto objetivo (TP): diferencia desde recta rota hasta ultimo pivote de la dirección contraria. Esa diferencia, desde recta rota hacia dirección del INGRESO.
+  - >> >> SL: 30% de (rotura de recta / ultimo pivote dirección contraria)
+  - >> >> TP: punto objetivo
+  

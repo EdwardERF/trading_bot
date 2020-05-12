@@ -2,3 +2,7 @@
 
 Alpha Vantage: https://www.alphavantage.co/
 Documentación de Alpha Vantage: https://www.alphavantage.co/documentation/
+GitHub de Alpha Vantage: https://github.com/RomelTorres/alpha_vantage
+
+Query para obtención de data: https://www.alphavantage.co/query?function=FX_INTRADAY&from_symbol=EUR&to_symbol=USD&interval=5min&apikey=TI6XG302QT0PUZIF
+
