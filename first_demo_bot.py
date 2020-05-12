@@ -24,3 +24,19 @@ print('Vela numero 1:')
 
 # seleccion de vela por ID
 print(all_candles[candles_id[0]])
+
+# convertir lista a tupla, para evitar error al llamar h, l, o, c
+all_candles_tuple = tuple(all_candles.items())
+
+print('OPEN')
+print(all_candles_tuple[0][1]['1. open'])
+print('----')
+print('HIGH')
+print(all_candles_tuple[0][1]['2. high'])
+print('----')
+print('LOW')
+print(all_candles_tuple[0][1]['3. low'])
+print('----')
+print('CLOSE')
+print(all_candles_tuple[0][1]['4. close'])
+print('----')
