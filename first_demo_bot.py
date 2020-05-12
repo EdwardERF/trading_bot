@@ -40,3 +40,17 @@ print('----')
 print('CLOSE')
 print(all_candles_tuple[0][1]['4. close'])
 print('----')
+
+# Encontrar puntos pivote
+# Pivotes TOP
+
+# Función que retorna todos los HIGHs en formato diccionario, con keys en numeros
+def find_highs():
+  all_highs = { 0: 'initial' }
+
+  for i in range(len(all_candles_tuple)): # para cada vela, guardarla en tupla vela: valor
+    all_highs[i] = all_candles_tuple[i][1]['2. high']
+  
+  return all_highs
+
+
