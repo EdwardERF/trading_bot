@@ -125,15 +125,12 @@ def es_pivote_top(i):
   current_high = get_pivot_highs()[i]
 
   if (current_high > pre_max_pivot and current_high > post_max_pivot):
-    first_top_pivot = current_high
+    is_pivot = True
   else:
-    first_top_pivot = None
+    is_pivot = False
 
-  return first_top_pivot
+  return is_pivot
 
 print('Es pivote?')
-print(es_pivote_top(50))
+print(es_pivote_top(60))
 
-
-
-# test_pivot = get_pivot_highs()[0]
