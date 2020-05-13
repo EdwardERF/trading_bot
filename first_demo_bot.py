@@ -2,6 +2,24 @@
 
 import json
 import requests
+import heapq # para encontrar los highest 2
+
+
+######################
+# VARIABLES GLOBALES #
+######################
+
+# variables para pivotes TOP
+first_top_pivot = None
+second_top_pivot = None
+
+# variables para pivotes BOTTOM
+first_bottom_pivot = None
+second_bottom_pivot = None
+
+########################
+# TERMINO DE VARIABLES #
+########################
 
 data_request = requests.get('https://www.alphavantage.co/query?function=FX_INTRADAY&from_symbol=EUR&to_symbol=USD&interval=5min&apikey=TI6XG302QT0PUZIF')
 
@@ -45,12 +63,24 @@ print('----')
 # Pivotes TOP
 
 # Función que retorna todos los HIGHs en formato diccionario, con keys en numeros
-def find_highs():
+def get_pivot_highs():
   all_highs = { 0: 'initial' }
+  all_highs_float = { 0: 0.0000 }
 
   for i in range(len(all_candles_tuple)): # para cada vela, guardarla en tupla vela: valor
     all_highs[i] = all_candles_tuple[i][1]['2. high']
   
-  return all_highs
+  for i in range(len(all_highs)):
+    all_highs_float[i] = float(all_highs[i])
 
+  return all_highs_float
 
+get_pivot_highs()
+
+print('espera')
+
+def get_top_pivots():
+  top_pivots = tuple(heapq.nlargest(2, get_pivot_highs()))
+  return top_pivots
+
+print(get_pivot_highs())
