@@ -34,14 +34,10 @@ all_candles = eur_usd_data["Time Series FX (5min)"]
 candles_id = list(all_candles)
 
 # de esta manera se accede a una ID de la lista
+print('Vela actual:')
 print(candles_id[0])
 
-print('linea para separar')
 print('-----------------')
-print('Vela numero 1:')
-
-# seleccion de vela por ID
-print(all_candles[candles_id[0]])
 
 # convertir lista a tupla, para evitar error al llamar h, l, o, c
 all_candles_tuple = tuple(all_candles.items())
@@ -75,14 +71,23 @@ def get_pivot_highs():
 
   return all_highs_float
 
-get_pivot_highs()
+# Función que retorna todos los HIGHs en formato diccionario, con keys en numeros
+def get_pivot_lows():
+  all_lows = { 0: 'initial' }
+  all_lows_float = { 0: 0.0000 }
+
+  for i in range(len(all_candles_tuple)): # para cada vela, guardarla en tupla vela: valor
+    all_lows[i] = all_candles_tuple[i][1]['3. low']
+  
+  for i in range(len(all_lows)):
+    all_lows_float[i] = float(all_lows[i])
+
+  return all_lows_float
 
 def get_top_highs():
   top_pivots = heapq.nlargest(2, get_pivot_highs().values())
   return top_pivots
 
-print(get_top_highs()) # innecesario, solo para efecto visual >> SE PUEDE BORRAR
-  
 # def get_top_pivots():
 #   all_highs_float = get_pivot_highs()
 
@@ -99,6 +104,8 @@ print(get_top_highs()) # innecesario, solo para efecto visual >> SE PUEDE BORRAR
 #       else:
 #         next
 
+
+## FUNCION PARA DETECTAR PIVOTES TOP
 def es_pivote_top(i):
 
   #obtencion de 4 pivotes posteriores
@@ -125,12 +132,46 @@ def es_pivote_top(i):
   current_high = get_pivot_highs()[i]
 
   if (current_high > pre_max_pivot and current_high > post_max_pivot):
-    is_pivot = True
+    is_pivot_top = True
   else:
-    is_pivot = False
+    is_pivot_top = False
 
-  return is_pivot
+  return is_pivot_top
 
-print('Es pivote?')
-print(es_pivote_top(60))
+#################################################
+## FUNCION PARA DETECTAR PIVOTES BOTTOM // no terminada
+def es_pivote_bottom(i):
 
+  #obtencion de 4 pivotes posteriores
+  post_four_bottom = {
+    1: get_pivot_lows()[i-1],
+    2: get_pivot_lows()[i-2],
+    3: get_pivot_lows()[i-3],
+    4: get_pivot_lows()[i-4],
+  }
+  #obtencion de highest pivot de los ultimos 4
+  post_bottom_pivot = min(post_four_bottom.values())
+  
+
+  #obtencion de 4 pivotes anteriores
+  pre_four_bottom = {
+    1: get_pivot_lows()[i+1],
+    2: get_pivot_lows()[i+2],
+    3: get_pivot_lows()[i+3],
+    4: get_pivot_lows()[i+4],
+  }
+  #obtencion de lower pivot de los ultimos 4
+  pre_bottom_pivot = min(pre_four_bottom.values())
+
+  current_low = get_pivot_lows()[i]
+
+  if (current_low > pre_bottom_pivot and current_low > post_bottom_pivot):
+    is_pivot_bottom = True
+  else:
+    is_pivot_bottom = False
+
+  return is_pivot_bottom
+
+
+print('Es pivote bottom?')
+print(es_pivote_bottom(10))
