@@ -88,22 +88,26 @@ def get_top_highs():
   top_pivots = heapq.nlargest(2, get_pivot_highs().values())
   return top_pivots
 
-# def get_top_pivots():
-#   all_highs_float = get_pivot_highs()
+def get_top_pivots():
+  top_pivots_list = []
+  top_pivots_dic = {}
+  
+  for i in range(len(get_pivot_highs())):
+    if (i >= 4):
+      if (es_pivote_top(i)):
+        if (len(top_pivots_dic) == 0):
+          print('length de primer dic')
+          print(len(top_pivots_dic))
+        ## agregar high a la lista
+        # top_pivots_list.append(get_pivot_highs()[i])
+          top_pivots_dic[1] = get_pivot_highs()[i]
+        elif (len(top_pivots_dic) == 1):
+          top_pivots_dic[2] = get_pivot_highs()[i]
+          break
+          ## si lista tiene mas de dos datos, entonces end
 
-#   counter = 0
-#   for i in range(len(all_highs_float)):
-#     while counter < 2:
-#       if (esPivote()):
-#         if (first_top_pivot != None):
-#           first_top_pivot = None #actual high
-#           counter++
-#         else:
-#           second_top_pivot = None #actual high
-#           counter++
-#       else:
-#         next
 
+  return top_pivots_dic
 
 ## FUNCION PARA DETECTAR PIVOTES TOP
 def es_pivote_top(i):
@@ -173,5 +177,8 @@ def es_pivote_bottom(i):
   return is_pivot_bottom
 
 
-print('Es pivote bottom?')
-print(es_pivote_bottom(10))
+print('Es pivote top?')
+print(es_pivote_top(4))
+
+print('test')
+print(get_top_pivots())
