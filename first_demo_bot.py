@@ -77,9 +77,63 @@ def get_pivot_highs():
 
 get_pivot_highs()
 
-def get_top_pivots():
+def get_top_highs():
   top_pivots = heapq.nlargest(2, get_pivot_highs().values())
-  print(get_top_pivots()) # innecesario, solo para efecto visual >> SE PUEDE BORRAR
   return top_pivots
 
+print(get_top_highs()) # innecesario, solo para efecto visual >> SE PUEDE BORRAR
   
+# def get_top_pivots():
+#   all_highs_float = get_pivot_highs()
+
+#   counter = 0
+#   for i in range(len(all_highs_float)):
+#     while counter < 2:
+#       if (esPivote()):
+#         if (first_top_pivot != None):
+#           first_top_pivot = None #actual high
+#           counter++
+#         else:
+#           second_top_pivot = None #actual high
+#           counter++
+#       else:
+#         next
+
+def es_pivote_top(i):
+
+  #obtencion de 4 pivotes posteriores
+  post_four_max = {
+    1: get_pivot_highs()[i-1],
+    2: get_pivot_highs()[i-2],
+    3: get_pivot_highs()[i-3],
+    4: get_pivot_highs()[i-4],
+  }
+  #obtencion de highest pivot de los ultimos 4
+  post_max_pivot = max(post_four_max.values())
+  
+
+  #obtencion de 4 pivotes anteriores
+  pre_four_max = {
+    1: get_pivot_highs()[i+1],
+    2: get_pivot_highs()[i+2],
+    3: get_pivot_highs()[i+3],
+    4: get_pivot_highs()[i+4],
+  }
+  #obtencion de lower pivot de los ultimos 4
+  pre_max_pivot = max(pre_four_max.values())
+
+  current_high = get_pivot_highs()[i]
+
+  if (current_high > pre_max_pivot and current_high > post_max_pivot):
+    first_top_pivot = current_high
+  else:
+    first_top_pivot = None
+
+  return first_top_pivot
+
+print('Es pivote?')
+print(es_pivote_top(50))
+
+
+
+# test_pivot = get_pivot_highs()[0]

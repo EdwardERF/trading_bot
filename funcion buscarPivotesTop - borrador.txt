@@ -1,17 +1,19 @@
-funcion buscarPivotesTop
+valores:
 
-do while (contador < 2):
+POST:
+1.0827
+1.0828
+1.0830
+1.0831
+// OK
 
-    for i in range(len(candles)):
-        if(candles[i]) es mayor a 4 velas menos y 4 velas mas:
-            if (contador != 1):
-                pivoteFinal = candles[i]
-                contador++
-            elif (contador = 1):
-                pivoteInicial = candles[i]
-        else
-            loop
-        
-        return pivoteInicial, pivoteFinal
 
-// otra funcion: crear recta con esos dos puntos
+
+
+
+PRE:
+1.0828
+1.0833
+1.0835
+1.0836
+// OK
