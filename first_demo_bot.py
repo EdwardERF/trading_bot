@@ -77,10 +77,9 @@ def get_pivot_highs():
 
 get_pivot_highs()
 
-print('espera')
-
 def get_top_pivots():
-  top_pivots = tuple(heapq.nlargest(2, get_pivot_highs()))
+  top_pivots = heapq.nlargest(2, get_pivot_highs().values())
+  print(get_top_pivots()) # innecesario, solo para efecto visual >> SE PUEDE BORRAR
   return top_pivots
 
-print(get_pivot_highs())
+  
