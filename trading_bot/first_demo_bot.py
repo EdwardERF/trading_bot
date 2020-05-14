@@ -5,22 +5,6 @@ import requests
 import heapq # para encontrar los highest 2
 
 
-######################
-# VARIABLES GLOBALES #
-######################
-
-# variables para pivotes TOP
-first_top_pivot = None
-second_top_pivot = None
-
-# variables para pivotes BOTTOM
-first_bottom_pivot = None
-second_bottom_pivot = None
-
-########################
-# TERMINO DE VARIABLES #
-########################
-
 data_request = requests.get('https://www.alphavantage.co/query?function=FX_INTRADAY&from_symbol=EUR&to_symbol=USD&interval=5min&apikey=TI6XG302QT0PUZIF')
 
 eur_usd_data = data_request.json()
@@ -184,3 +168,6 @@ def get_intersection_point(x1, x2, y1, y2, x3):
 
 print('Punto de interseccion')
 print(get_intersection_point(1, 8, 1.08222, 1.08238, 10))
+
+print('pivote top?')
+print(es_pivote_top(16))
