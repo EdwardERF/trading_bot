@@ -155,12 +155,38 @@ def get_bottom_pivots(currency):
   return bottom_pivots_dic
 
 # FUNCION PARA GENERAR RECTA DE PIVOTES
-def get_intersection_point(x1, x2, y1, y2, x3):
+def calculate_intersection_point(x1, x2, y1, y2, x3):
   m = (y2 - y1) / (x2 - x1)
 
   intersection_point = m * (x3 - x1) + y1
 
   return intersection_point
+
+def get_top_intersection_point(currency):
+    #esto es: conseguir los valores en formato list para mejor lectura
+    top_pivots = list(get_top_pivots(currency).items())
+    x1 = top_pivots[0][0]
+    y1 = top_pivots[0][1]
+    x2 = top_pivots[1][0]
+    y2 = top_pivots[1][1]
+    x3 = float(currency[0][1]['2. high'])
+
+    intersection_point = calculate_intersection_point(x1, x2, y1, y2, x3)
+
+    return intersection_point
+
+def get_bottom_intersection_point(currency):
+    #esto es: conseguir los valores en formato list para mejor lectura
+    bottom_pivots = list(get_bottom_pivots(currency).items())
+    x1 = bottom_pivots[0][0]
+    y1 = bottom_pivots[0][1]
+    x2 = bottom_pivots[1][0]
+    y2 = bottom_pivots[1][1]
+    x3 = float(currency[0][1]['3. low'])
+
+    intersection_point = calculate_intersection_point(x1, x2, y1, y2, x3)
+
+    return intersection_point
 
 # print for testing
 eur_usd = eur_usd_data()
@@ -168,3 +194,9 @@ print('top pivots')
 print(get_top_pivots(eur_usd))
 print('bottom pivots')
 print(get_bottom_pivots(eur_usd))
+
+print('top intersection point')
+print(get_top_intersection_point(eur_usd))
+
+print('bottom intersection point')
+print(get_bottom_intersection_point(eur_usd))
