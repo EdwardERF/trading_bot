@@ -117,7 +117,7 @@ def is_pivot_bottom(i, currency):
 
   current_low = get_pivot_lows(currency)[i]
 
-  if (current_low > pre_bottom_pivot and current_low > post_bottom_pivot):
+  if (current_low < pre_bottom_pivot and current_low < post_bottom_pivot):
     is_pivot_bottom = True
   else:
     is_pivot_bottom = False
@@ -132,9 +132,9 @@ def get_top_pivots(currency):
     if (i >= 4):
       if (is_pivot_top(i, currency)):
         if (len(top_pivots_dic) == 0):
-          top_pivots_dic[1] = get_pivot_highs(eur_usd)[i]
+          top_pivots_dic[i] = get_pivot_highs(eur_usd)[i]
         elif (len(top_pivots_dic) == 1):
-          top_pivots_dic[2] = get_pivot_highs(eur_usd)[i]
+          top_pivots_dic[i] = get_pivot_highs(eur_usd)[i]
           break
 
   return top_pivots_dic
@@ -147,9 +147,9 @@ def get_bottom_pivots(currency):
     if (i >= 4):
       if (is_pivot_bottom(i, currency)):
         if (len(bottom_pivots_dic) == 0):
-          bottom_pivots_dic[1] = get_pivot_lows(eur_usd)[i]
+          bottom_pivots_dic[i] = get_pivot_lows(eur_usd)[i]
         elif (len(bottom_pivots_dic) == 1):
-          bottom_pivots_dic[2] = get_pivot_lows(eur_usd)[i]
+          bottom_pivots_dic[i] = get_pivot_lows(eur_usd)[i]
           break
 
   return bottom_pivots_dic
@@ -168,6 +168,3 @@ print('top pivots')
 print(get_top_pivots(eur_usd))
 print('bottom pivots')
 print(get_bottom_pivots(eur_usd))
-
-print('Punto de interseccion')
-print(get_intersection_point(1, 8, 1.08222, 1.08238, 10))
