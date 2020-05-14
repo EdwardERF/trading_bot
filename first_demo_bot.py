@@ -89,15 +89,12 @@ def get_top_highs():
   return top_pivots
 
 def get_top_pivots():
-  top_pivots_list = []
   top_pivots_dic = {}
   
   for i in range(len(get_pivot_highs())):
     if (i >= 4):
       if (es_pivote_top(i)):
         if (len(top_pivots_dic) == 0):
-          print('length de primer dic')
-          print(len(top_pivots_dic))
         ## agregar high a la lista
         # top_pivots_list.append(get_pivot_highs()[i])
           top_pivots_dic[1] = get_pivot_highs()[i]
@@ -177,8 +174,13 @@ def es_pivote_bottom(i):
   return is_pivot_bottom
 
 
-print('Es pivote top?')
-print(es_pivote_top(4))
+# FUNCION PARA GENERAR RECTA DE PIVOTES
+def get_intersection_point(x1, x2, y1, y2, x3):
+  m = (y2 - y1) / (x2 - x1)
 
-print('test')
-print(get_top_pivots())
+  intersection_point = m * (x3 - x1) + y1
+
+  return intersection_point
+
+print('Punto de interseccion')
+print(get_intersection_point(1, 8, 1.08222, 1.08238, 10))
