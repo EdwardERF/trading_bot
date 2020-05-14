@@ -19,21 +19,26 @@ def eur_usd_data():
 
     return eur_usd_candles_id
 
-def actual_candle_data():
-    eur_usd = eur_usd_data()
+def actual_candle_data(currency):
     print('Actual Candle Data:')
     print('OPEN')
-    print(eur_usd[0][1]['1. open'])
+    print(currency[0][1]['1. open'])
     print('----')
     print('HIGH')
-    print(eur_usd[0][1]['2. high'])
+    print(currency[0][1]['2. high'])
     print('----')
     print('LOW')
-    print(eur_usd[0][1]['3. low'])
+    print(currency[0][1]['3. low'])
     print('----')
     print('CLOSE')
-    print(eur_usd[0][1]['4. close'])
+    print(currency[0][1]['4. close'])
     print('----')
+
+def actual_candle_high(currency):
+    return float(currency[0][1]['2. high'])
+
+def actual_candle_low(currency):
+    return float(currency[0][1]['3. low'])
 
 # Función que retorna todos los HIGHs en formato diccionario, con keys en numeros
 def get_pivot_highs(currency):
@@ -139,6 +144,14 @@ def get_top_pivots(currency):
 
   return top_pivots_dic
 
+def last_top_pivot(currency):
+    key = tuple(get_top_pivots(currency))[0]
+    return get_top_pivots(currency)[key]
+
+def last_bottom_pivot(currency):
+    key = tuple(get_bottom_pivots(currency))[0]
+    return get_bottom_pivots(currency)[key]
+
 #obtencion de ultimos dos pivotes bottom
 def get_bottom_pivots(currency):
   bottom_pivots_dic = {}
@@ -188,15 +201,38 @@ def get_bottom_intersection_point(currency):
 
     return intersection_point
 
+
+## CUIDADO!!!! Se trata de SEÑAL, NO CONFIRMA INGRESO
+## LA SEÑAL GENERA UN PENDING ORDER
+# esta funcion se va a tener que modificar de actual_high a current_value >> falta API que de el current_value
+def get_signal_top(currency):
+    actual_high = actual_candle_high(currency)
+    top_intersection = get_top_intersection_point(currency)
+    last_high = last_top_pivot(currency)
+    if ((actual_high > top_intersection) and (actual_high < last_high)):
+        return True
+    else:
+        return False
+
+## CUIDADO!!!! Se trata de SEÑAL, NO CONFIRMA INGRESO
+## LA SEÑAL GENERA UN PENDING ORDER
+# esta funcion se va a tener que modificar de actual_low a current_value >> falta API que de el current_value
+def get_signal_bottom(currency):
+    actual_low = actual_candle_low(currency)
+    bottom_intersection = get_bottom_intersection_point(currency)
+    last_low = last_bottom_pivot(currency)
+    if ((actual_low < bottom_intersection) and (actual_low > last_low)):
+        return True
+    else:
+        return False
+
+
 # print for testing
 eur_usd = eur_usd_data()
-print('top pivots')
-print(get_top_pivots(eur_usd))
-print('bottom pivots')
-print(get_bottom_pivots(eur_usd))
 
-print('top intersection point')
-print(get_top_intersection_point(eur_usd))
+print('signal top')
+print(get_signal_top(eur_usd))
 
-print('bottom intersection point')
-print(get_bottom_intersection_point(eur_usd))
+print('signal bot')
+print(get_signal_bottom(eur_usd))
+
