@@ -6,3 +6,7 @@ GitHub de Alpha Vantage: https://github.com/RomelTorres/alpha_vantage
 
 Query para obtención de data: https://www.alphavantage.co/query?function=FX_INTRADAY&from_symbol=EUR&to_symbol=USD&interval=5min&apikey=TI6XG302QT0PUZIF
 
+Key de alpaca paper account: 
+Endpoint: https://paper-api.alpaca.markets
+API Key ID: PK31768SRL9WBTUB3S9F
+Secret Key: SE1AssOmIUCDXdBdDektImYN0eNzz7YVknY2DrgC
